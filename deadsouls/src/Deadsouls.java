@@ -223,7 +223,6 @@ public class Deadsouls {
                                 experiencia -= expSiguienteNivel;
                                 expSiguienteNivel += 50;
                                 vidaMaxima += 20;
-                                vidaActual = vidaMaxima;
                                 ataqueHeroe += 5;
                                 defensaHeroe += 2;
                                 System.out.println("\n SUBISTE DE NIVEL. Ahora eres Nivel " + nivel);
