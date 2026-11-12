@@ -23,7 +23,7 @@ public class Deadsouls {
         System.out.print("Introduce el nombre de tu heroe: ");
         nombreHeroe = scanner.nextLine().trim();
 
-        // Validación del nombre del personaje (si está vacío, conserva "Aventurero")
+        // Validación del nombre del personaje
         if (nombreHeroe.isEmpty()) {
             nombreHeroe = "Aventurero";
             System.out.println("No has introducido ningun nombre. Se usara el predeterminado: " + nombreHeroe);
@@ -70,25 +70,26 @@ public class Deadsouls {
             }
         }
 
-        // Estadísticas secundarias e Inventario inicial tras el reparto
+        // Estadísticas secundarias, Vidas e Inventario inicial tras el reparto
         int vidaActual = vidaMaxima;
         int nivel = 1;
         int experiencia = 0;
         int expSiguienteNivel = 100;
         int monedas = 50;
+        int vidasHeroe = 3; 
         String[] inventario = { "Pocion de vida", "Espada oxidada", "Escudo de madera", "Vacio", "Vacio" };
 
-        // Arrays Paralelos de datos de Enemigos
+        // Base de datos de Enemigos (Arrays Paralelos)
         String[] enemigosNombres = { "Duende", "Lobo Salvaje", "Esqueleto", "Orco" };
         int[] enemigosVidaMax = { 30, 45, 60, 80 };
         int[] enemigosAtaque = { 8, 12, 15, 20 };
 
-        // Variables de progresión del Boss Final (Declarado como constante final)
+        // Variables de progresión del Boss Final
         int enemigosDerrotados = 0;
         final int ENEMIGOS_PARA_BOSS = 10;
 
         System.out.println("\nPersonaje creado con exito.");
-        System.out.println("Estadisticas finales -> Vida: " + vidaMaxima + " | Ataque: " + ataqueHeroe + " | Defensa: " + defensaHeroe);
+        System.out.println("Estadisticas finales -> Vidas: " + vidasHeroe + " | Vida: " + vidaMaxima + " | Ataque: " + ataqueHeroe + " | Defensa: " + defensaHeroe);
         System.out.println("=========================================================================================");
 
         boolean jugando = true;
@@ -142,7 +143,7 @@ public class Deadsouls {
                     // Bucle de combate por turnos
                     while (enCombate) {
                         System.out.println("\n----------------------------------------");
-                        System.out.println("Tu Vida: " + vidaActual + "/" + vidaMaxima + " | Vida del " + enemigo + ": " + enemigoVida);
+                        System.out.println("Vidas: " + vidasHeroe + " | Tu Vida: " + vidaActual + "/" + vidaMaxima + " | Vida del " + enemigo + ": " + enemigoVida);
                         System.out.println("1. Atacar");
                         System.out.println("2. Defenderse");
                         System.out.println("3. Usar Objeto (Inventario en Combate)");
@@ -153,16 +154,13 @@ public class Deadsouls {
                         boolean turnoValido = true;
 
                         if (accion == 1) {
-                            // Turno del Jugador: Atacar (Modificador aleatorio entre -2 y 2)
                             int dañoAlEnemigo = Math.max(1, ataqueHeroe + random.nextInt(5) - 2);
                             enemigoVida -= dañoAlEnemigo;
                             System.out.println("Atacas al " + enemigo + " y le infringes " + dañoAlEnemigo + " de daño.");
                         } else if (accion == 2) {
-                            // Turno del Jugador: Defenderse
                             seDefendio = true;
                             System.out.println("Te pones en guardia. Tu defensa aumentara este turno.");
                         } else if (accion == 3) {
-                            // Turno del Jugador: Abrir el inventario rápido en pleno combate
                             System.out.println("\n --- INVENTARIO EN COMBATE ---");
                             for (int i = 0; i < inventario.length; i++) {
                                 System.out.println((i + 1) + ". " + inventario[i]);
@@ -191,7 +189,6 @@ public class Deadsouls {
                                     turnoValido = false;
                                 }
                             } else if (slot == opcionCancelar) {
-                                // Distinguir claramente la cancelación de una opción inválida
                                 System.out.println("Cancelando uso de objeto. Volviendo a las opciones de combate...");
                                 turnoValido = false;
                             } else {
@@ -202,7 +199,6 @@ public class Deadsouls {
                             System.out.println("Opcion invalida. Pierdes el turno por dudar.");
                         }
 
-                        // Reiniciar el turno del bucle si el jugador canceló el inventario o cometió un error
                         if (!turnoValido) {
                             continue;
                         }
@@ -210,7 +206,6 @@ public class Deadsouls {
                         // Comprobar si el enemigo murió
                         if (enemigoVida <= 0) {
                             System.out.println("\nHas derrotado al " + enemigo + ".");
-                            // Si se derrota al Boss Final se acaba la partida con victoria
                             if (esBoss) {
                                 System.out.println("\n========================================================");
                                 System.out.println(" ¡¡ ENHORABUENA, " + nombreHeroe.toUpperCase() + " !!");
@@ -221,7 +216,6 @@ public class Deadsouls {
                                 enCombate = false;
                                 break;
                             }
-                            // Recompensas por enemigos comunes
                             enemigosDerrotados++;
                             int monedasGanadas = random.nextInt(15) + 10;
                             int expGanada = random.nextInt(20) + 20;
@@ -230,15 +224,15 @@ public class Deadsouls {
                             System.out.println("Encontraste " + monedasGanadas + " monedas.");
                             System.out.println("Ganaste " + expGanada + " puntos de experiencia.");
                             
-                            // Sistema de subida de nivel
+                            // SUBIDA DE NIVEL EQUILIBRADA (Ataque reducido de +5 a +2)
                             if (experiencia >= expSiguienteNivel) {
                                 nivel++;
                                 experiencia -= expSiguienteNivel;
                                 expSiguienteNivel += 50;
                                 vidaMaxima += 20;
-                                vidaActual = vidaMaxima; // Rellenar vida al subir de nivel o dejar max
-                                ataqueHeroe += 5;
-                                defensaHeroe += 2;
+                                vidaActual = vidaMaxima;
+                                ataqueHeroe += 2; // Antes sumaba 5, ahora sube de forma más moderada (+2)
+                                defensaHeroe += 1; // Antes sumaba 2, ahora sube +1
                                 System.out.println("\n SUBISTE DE NIVEL. Ahora eres Nivel " + nivel);
                                 System.out.println("Estadisticas aumentadas de forma permanente.");
                             }
@@ -255,12 +249,25 @@ public class Deadsouls {
 
                         // Comprobar si el jugador murió
                         if (vidaActual <= 0) {
+                            vidasHeroe--; 
                             System.out.println("\nHas sido derrotado por el " + enemigo + "...");
+                            System.out.println("¡Has perdido una vida! Vidas restantes: " + vidasHeroe + "/3");
+
+                            if (vidasHeroe <= 0) {
+                                System.out.println("\n========================================================");
+                                System.out.println("                     GAME OVER                          ");
+                                System.out.println("        Te has quedado sin vidas. Has muerto.           ");
+                                System.out.println("========================================================");
+                                jugando = false;
+                                enCombate = false;
+                                break;
+                            }
+
                             if (esBoss) {
                                 System.out.println("El Boss te ha destrozado. El contador de enemigos derrotados se resetea a 5.");
                                 enemigosDerrotados = 5;
                             }
-                            System.out.println("Unos aldeanos te rescatan, pero pierdes la mitad de tus monedas.");
+                            System.out.println("Unos aldeanos te rescatan, pierdes la mitad de tus monedas y recuperas algo de salud.");
                             monedas /= 2;
                             vidaActual = vidaMaxima / 2;
                             enCombate = false;
@@ -270,6 +277,7 @@ public class Deadsouls {
                 case 2:
                     // --- CONSULTAR ESTADÍSTICAS ---
                     System.out.println("\n --- ESTADISTICAS DE " + nombreHeroe.toUpperCase() + " ---");
+                    System.out.println("Vidas: " + vidasHeroe + " / 3");
                     System.out.println("Nivel: " + nivel);
                     System.out.println("Experiencia: " + experiencia + "/" + expSiguienteNivel);
                     System.out.println("Vida: " + vidaActual + "/" + vidaMaxima);
@@ -305,13 +313,13 @@ public class Deadsouls {
                     }
                     break;
                 case 4:
-                    // --- SISTEMA DE TIENDA CORREGIDO ---
+                    // --- SISTEMA DE TIENDA ---
                     boolean enTienda = true;
                     while (enTienda) {
                         System.out.println("\n --- TIENDA DEL REINO ---");
                         System.out.println("Tus Monedas: " + monedas);
                         System.out.println("1. Pocion de vida (20 monedas) [+40 PV]");
-                        System.out.println("2. Dagas afiladas (40 monedas) [+4 ATQ] (Reemplaza arma)");
+                        System.out.println("2. Dagas afiladas (40 monedas) [+2 ATQ] (Reemplaza arma)"); 
                         System.out.println("3. Escudo reforzado (45 monedas) [+2 DEF] (Reemplaza escudo)");
                         System.out.println("4. Salir de la tienda");
                         System.out.print("Que deseas comprar?: ");
@@ -319,7 +327,6 @@ public class Deadsouls {
 
                         switch (opcionTienda) {
                             case 1:
-                                // Compra de Consumible: Verificar dinero y hueco libre ("Vacio")
                                 if (monedas >= 20) {
                                     int huecoVacio = -1;
                                     for (int i = 0; i < inventario.length; i++) {
@@ -340,7 +347,6 @@ public class Deadsouls {
                                 }
                                 break;
                             case 2:
-                                // Comprobar si ya tiene las dagas y verificar que tiene la espada oxidada para reemplazar
                                 boolean tieneDagas = false;
                                 for (int i = 0; i < inventario.length; i++) {
                                     if (inventario[i].equals("Dagas afiladas")) {
@@ -361,9 +367,9 @@ public class Deadsouls {
                                     }
                                     if (posEspada != -1) {
                                         monedas -= 40;
-                                        ataqueHeroe += 4;
+                                        ataqueHeroe += 4; 
                                         inventario[posEspada] = "Dagas afiladas";
-                                        System.out.println("¡Compraste las Dagas afiladas! Tu ataque aumenta permanentemente.");
+                                        System.out.println("¡Compraste las Dagas afiladas! Tu ataque aumenta de forma equilibrada.");
                                     } else {
                                         System.out.println("No tienes la Espada oxidada en el inventario para realizar el reemplazo.");
                                     }
@@ -372,7 +378,6 @@ public class Deadsouls {
                                 }
                                 break;
                             case 3:
-                                // Corrección: Comprobar si ya posee el escudo reforzado y verificar que tiene el escudo de madera
                                 boolean tieneEscudoReforzado = false;
                                 for (int i = 0; i < inventario.length; i++) {
                                     if (inventario[i].equals("Escudo reforzado")) {
