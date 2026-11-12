@@ -1,7 +1,26 @@
+# Dead Souls
+
 ¡Bienvenido a **Dead Souls**! Este es un videojuego de rol y aventura de texto desarrollado en Java para la consola. El proyecto ha sido diseñado y programado desde cero como parte de la entrega de la **Primera Evaluación** para el módulo de Programación de **1.º de DAW (Curso 2026/2027)**.
 
+**Autor:** Jorge Fernández Redondo
+
+---
+
+## 📂 Estructura del Repositorio
+El proyecto se encuentra organizado de la siguiente manera:
+```text
+deadsouls/
+├── .gitignore
+├── docs/
+│   └── Memoria_JorgeF.pdf       # Memoria técnica del proyecto
+├── src/
+│   └── Deadsouls.java           # Código fuente principal en Java
+└── README.md                    # Guía y presentación del proyecto
+
+Puedes consultar la documentación detallada del desarrollo en la [Memoria del Proyecto (PDF)](docs/Memoria_JorgeF.pdf).
+
 ## 📝 Descripción y Objetivo del Juego
-En *Dead Souls*, asumes el papel de un valiente aventurero que debe explorar un reino hostil plagado de monstruos. El objetivo principal es **derrotar a 10 enemigos comunes** para limpiar las tierras y hacer aparecer al jefe definitivo: **El Señor de las Sombras**. La partida termina con una victoria absoluta si logras vencer al Boss, o con una derrota si tu salud llega a cero en cualquier combate.
+En *Dead Souls*, asumes el papel de un valiente aventurero que debe explorar un reino hostil plagado de monstruos. El objetivo principal es **derrotar a 10 enemigos comunes** para limpiar las tierras y hacer aparecer al jefe final: **El Señor de las Sombras**. La partida termina con una victoria absoluta si logras vencer al jefe final, o con una derrota si tus vidas llega a cero en cualquier combate.
 
 ## ⚔️ Reglas Básicas del Juego
 *   **Creación de Personaje:** Al iniciar, dispones de 10 puntos de estadística iniciales para repartir libremente entre Vida (+10 PV), Ataque (+2 ATQ) y Defensa (+1 DEF).
@@ -11,7 +30,8 @@ En *Dead Souls*, asumes el papel de un valiente aventurero que debe explorar un 
     *   *Usar Objeto:* Permite abrir un inventario rápido para consumir pociones de salud en pleno combate.
 *   **Progresión y Recompensas:** Al derrotar enemigos, conseguirás monedas y puntos de experiencia. Al acumular suficiente experiencia, subirás de nivel, incrementando tus estadísticas máximas de forma permanente.
 *   **La Tienda del Reino:** Podrás gastar tus monedas acumuladas en adquirir pociones de vida o equipamiento pasivo (Dagas afiladas o Escudo reforzado) que mejoran tus atributos de combate de forma permanente.
-*   **Penalización por Derrota:** Si mueres contra un enemigo común, unos aldeanos te rescatarán a cambio de perder la mitad de tus monedas actuales. Si mueres contra el Boss Final, el contador de enemigos derrotados se reiniciará a 5.
+*   **Penalización por Derrota:** Si mueres contra un enemigo común, unos aldeanos te rescatarán a cambio de perder la mitad de tus monedas actuales y una de tus tres vidas. Si mueres contra el Boss Final, el contador de enemigos derrotados se reiniciará a 5.
+*   **Derrota final: Dispones de tres vidas de las cuales perderas una cada vez que los aldeanos tengan que rescatarte.La perdida de las tres vidas implica la perdida y finalización de las partida.
 
 ## 🛠️ Requisitos Previos
 Para poder compilar y ejecutar este videojuego, necesitas tener instalado en tu sistema:
