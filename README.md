@@ -4,7 +4,7 @@
 
 **Autor:** Jorge Fernández Redondo
 
----
+
 
 ## 📂 Estructura del Repositorio
 El proyecto se encuentra organizado de la siguiente manera:
@@ -16,7 +16,8 @@ deadsouls/
 ├── src/
 │   └── Deadsouls.java           # Código fuente principal en Java
 └── README.md                    # Guía y presentación del proyecto
-
+```
+## 📝 Memoria del proyecto
 Puedes consultar la documentación detallada del desarrollo en la [Memoria del Proyecto (PDF)](docs/Memoria_JorgeF.pdf).
 
 ## 📝 Descripción y Objetivo del Juego
@@ -42,17 +43,11 @@ Para poder compilar y ejecutar este videojuego, necesitas tener instalado en tu 
 
 ### Opción 1: Desde la Consola de Comandos
 1. Abre tu terminal y navega hasta la carpeta del proyecto donde se encuentra el archivo fuente:
-   ```bash
    cd ruta/al/proyecto/src
-   ```
 2. Compila el archivo fuente utilizando el compilador de Java (`javac`):
-   ```bash
    javac Deadsouls.java
-   ```
 3. Ejecuta el programa compilado con la máquina virtual de Java (`java`):
-   ```bash
    java Deadsouls
-   ```
 
 ### Opción 2: Desde un IDE (VS Code / IntelliJ / NetBeans)
 1. Importa o abre la carpeta raíz del proyecto en tu IDE favorito.
