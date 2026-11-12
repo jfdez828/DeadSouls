@@ -1,8 +1,20 @@
+# Archivos compilados de Java
 *.class
-.class/
-.settings/
-.bin/
-.project
-.classpath
+
+# Carpetas de compilación
+bin/
+out/
+build/
+
+# Configuración local de los IDE
 .vscode/
 .idea/
+.settings/
+
+# Archivos de Eclipse
+.project
+.classpath
+
+# Archivos temporales
+*.tmp
+*.log
